@@ -15,13 +15,14 @@
 		request.setCharacterEncoding("utf-8");
 	String product = request.getParameter("product");
 	String quantity = request.getParameter("quantity");
+	String color = request.getParameter("color");
 	
 		List<ProductDto> cart = (List<ProductDto>)session.getAttribute("cart");
 		
 		if(cart == null){
 			cart = new ArrayList<>();	
 		}
-		cart.add(new ProductDto(request.getParameter("product"),request.getParameter("color"),request.getParameter("quantity")));
+		cart.add(new ProductDto(product,color,quantity));
 		
 		session.setAttribute("cart", cart);
 		

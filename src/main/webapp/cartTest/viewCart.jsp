@@ -10,8 +10,7 @@
 <title> 내 장바구니</title>
 </head>
 <body>
-	<h2>내 장바구니 상품 목록</h2>
-	<hr>
+
 	<%
 	List<ProductDto> cart = (List<ProductDto>)session.getAttribute("cart");
 	
@@ -19,13 +18,15 @@
 
 	
 	%>
-		<c:if test="${cart == null}">
+		<h2>장바구니 목록</h2>
+		<hr>
+		<c:choose>
+		<c:when test="${cart == null}">
 		<h2>장바구니가 비었습니다.</h2>
 		<a href="productList.jsp">담으러 가기</a>
-		</c:if>
+		</c:when>
+		<c:otherwise>
 	
-	<h2>장바구니 목록</h2>
-		<hr>
 		<table border="1" cellspacing = "0" cellpadding = "0">
 			<thead>
 			<tr>
@@ -47,9 +48,12 @@
 				
 				</tr>
 				</tbody>
-			</c:forEach>		
+			</c:forEach>
 		</table>
 		<a href="removeCart.jsp">장바구니 비우기</a><br><br>
+		</c:otherwise>
+		</c:choose>	
+		
 		
 </body>
 </html>
