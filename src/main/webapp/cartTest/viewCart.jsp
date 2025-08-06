@@ -41,8 +41,8 @@
 				<tbody>
 				<tr>
 					<td>${status.count}</td>
+					<td>${productDto.productType }</td>
 					<td>${productDto.productColor }</td>
-					<td>${productDto.productQuantity }</td>
 					<td>${productDto.productQuantity }</td>
 				
 				</tr>
