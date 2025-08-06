@@ -4,6 +4,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="jakarta.tags.core" %>
+<%@ taglib prefix="fn" uri="jakarta.tags.functions" %>
 <jsp:useBean id="list" class="com.ddu.dto.BoardDto"/>
 <!DOCTYPE html>
 <html>
@@ -18,7 +19,7 @@
   }
 
   table {
-    width: 100%;
+    width: 60%;
     border-collapse: collapse;
     font-size: 14px;
     color: #333;
@@ -31,7 +32,7 @@
 
   thead th {
     padding: 10px 15px;
-    text-align: left;
+    text-align: center;
     font-weight: 600;
     color: #555;
   }
@@ -89,7 +90,7 @@
 		List<BoardDto> boarList = new ArrayList<>();
 		// 게시글(BoardDto)를 여러개 담을 ArrayList 준비(선언)
 		
-		boarList.add(new BoardDto(1,"안녕하세요. 첫 글입니다.", "이순신", "20250801"));
+		boarList.add(new BoardDto(1,"안녕하세요. 첫 글입니다.안녕하세요. 첫 글입니다.안녕하세요. 첫 글입니다.안녕하세요. 첫 글입니다.안녕하세요. 첫 글입니다.", "이순신", "20250801"));
 		boarList.add(new BoardDto(2,"반갑습니다", "김유신", "20250803"));
 		boarList.add(new BoardDto(3,"오늘은 비가 오네요", "강감찬", "20250804"));
 		boarList.add(new BoardDto(4,"모두들 안녕하세요.", "홍길동", "20250805"));
@@ -113,7 +114,17 @@
 				<tbody>
 				<tr>
 					<td>${boardDto.bnum }</td>
-					<td> <a href="#">${boardDto.btitle }</a></td>
+					<td>
+					<!-- 게시글 제목이 40자 이상일때 40자 이상은 ...표시 -->
+					<c:choose>
+						<c:when test="${fn:length(boardDto.btitle) > 40}">
+						<a href="#">${fn:substring(boardDto.btitle,0,40)}...</a>
+						</c:when>
+						<c:otherwise>
+					<a href="#"> ${boardDto.btitle }</a>
+						</c:otherwise>
+					</c:choose>
+					</td>
 					<td>${boardDto.bwriter }</td>
 					<td>${boardDto.bdate }</td>
 				
@@ -121,5 +132,8 @@
 				</tbody>
 			</c:forEach>		
 		</table>
+		
+			
+		
 </body>
 </html>
